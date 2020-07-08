@@ -81,11 +81,6 @@ We've numbered the TODO steps so you can do them in order:
 
 After You've completed the TODOs, you can optionally commit your changes. This will allow you to see the code you wrote whenever you return to the branch. The following git code will add and save **all** your changes.
 
-```bash
-git add .
-git commit -m "Your commit message"
-```
-
 **Step 5: Compare with the solution**
 
 Most exercises will have a list of steps for you to check off in the classroom. Once you've checked these off, you'll see a pop up window with a link to the solution code. Note the **Diff** link:
