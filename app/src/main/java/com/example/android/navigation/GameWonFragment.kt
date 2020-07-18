@@ -47,12 +47,34 @@ class GameWonFragment : Fragment() {
                 view.findNavController().navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
             }
         }
-        val args = arguments?.let { GameWonFragmentArgs.fromBundle(it) }
-        if (args != null) {
-            Toast.makeText(context,
-                    "Num Correct: ${args.numCorrect}, Num Questions: ${args.numQuestions}",
-                    Toast.LENGTH_LONG).show()
-        }
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.winner_menu, menu)
+    }
+
+    private fun getShareIntent(): Intent? {
+        val args = arguments?.let { GameWonFragmentArgs.fromBundle(it) }
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        if (args != null) {
+            shareIntent.setType("text/plain")
+                    .putExtra(Intent.EXTRA_TEXT,
+                            getString(R.string.share_success_text, args.numQuestions, args.numCorrect))
+        }
+        return shareIntent
+    }
+
+    private fun shareSuccess() {
+        startActivity(getShareIntent())
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.share -> shareSuccess()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
