@@ -47,6 +47,12 @@ class GameWonFragment : Fragment() {
                 view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             }
         }
+        val args = arguments?.let { GameWonFragmentArgs.fromBundle(it) }
+        if (args != null) {
+            Toast.makeText(context,
+                    "Num Correct: ${args.numCorrect}, Num Questions: ${args.numQuestions}",
+                    Toast.LENGTH_LONG).show()
+        }
         return binding.root
     }
 }
